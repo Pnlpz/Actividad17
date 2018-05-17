@@ -1,3 +1,4 @@
+
 class Product
   def initialize(name, large, medium, small, xsmall)
   @name = name
@@ -6,7 +7,12 @@ class Product
   @small = small
   @xsmall = xsmall
   end
+
+  def avg
+  (@large + @medium + @small + @xsmall) / 4
+  end
 end
+
  products_list = []
  data = []
  File.open('catalogo.txt', 'r') { |file| data = file.readlines}
@@ -14,4 +20,4 @@ end
    ls = prod.split(', ')
    products_list << Product.new(ls[0], ls[1], ls[2], ls[3], ls[4])
  end
-puts products_list
+  print products_list
