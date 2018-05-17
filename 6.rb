@@ -1,15 +1,13 @@
 
 class Product
-  def initialize(name, large, medium, small, xsmall)
+  attr_reader :name
+  def initialize(name, *sizes)
   @name = name
-  @large = large
-  @medium = medium
-  @small = small
-  @xsmall = xsmall
+  @sizes = sizes.map(&:to_i)
   end
 
-  def avg
-  (@large + @medium + @small + @xsmall) / 4
+  def average
+   @sizes.inject(&:+) / @sizes.size
   end
 end
 
@@ -18,12 +16,12 @@ end
  File.open('catalogo.txt', 'r') { |file| data = file.readlines}
  data.each do |prod|
    ls = prod.split(', ')
-   products_list << Product.new(ls[0], ls[1], ls[2], ls[3], ls[4])
+   products_list << Product.new(*ls)
  end
-  print products_list
 
+products_list.each do |product|
+  puts product.name
+  puts product.average
+end
 
-
-# Optimizar el código implementando el operador splat al momento de
-# instanciar los productos
-# Generar un método que permita calcular el promedio de precio por producto.
+# Done!
