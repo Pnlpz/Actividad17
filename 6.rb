@@ -1,6 +1,7 @@
 
 class Product
-  attr_reader :name
+  attr_reader :name, :sizes
+
   def initialize(name, *sizes)
   @name = name
   @sizes = sizes.map(&:to_i)
@@ -20,8 +21,8 @@ end
  end
 
 products_list.each do |product|
-  puts product.name
-  puts product.average
+  print product.name 
+  print product.average
 end
 
 # Done!

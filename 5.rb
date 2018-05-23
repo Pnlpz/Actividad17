@@ -20,6 +20,7 @@ end
    print m.to_morse
 
 
+# Listo
 
 # Refactorizar el código del método de instancia generate_hash para que
 # los datos estén contenidos en un hash donde los números serán las claves

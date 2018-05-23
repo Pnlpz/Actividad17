@@ -17,3 +17,5 @@ dog = Dog.new(propiedades)
 puts dog.nombre
 puts dog.ladrar
 print dog
+
+# Listo

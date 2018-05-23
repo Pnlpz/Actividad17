@@ -1,24 +1,34 @@
 class Product
+  attr_accessor :name, :sizes
 
   def initialize(name, *sizes)
-  @name = name
-  @sizes = sizes.map(&:to_i)
+    @name = name
+    @sizes = sizes.map(&:to_i)
+  end
+
+  products_list = []
+  data = []
+  File.open('catalogo.txt', 'r'){ |file| data = file.readlines }
+  data.each do |prod|
+  ls = prod.split(', ')
+  name = ls.shift
+  products_list << Product.new(name, *ls)
+  end
+
+    arr = []
+    products_list.each do |product|
+  a = "#{product.name}, "
+  product.sizes.each do |size|
+  unless size == product.sizes.last
+  a += ", #{size}"
+    end
+  end
+  arr << a
+end
+
+  File.open('new_catalogue.txt', 'w') do |f|
+  arr.each {|x| f.puts x}
   end
 end
 
-products_list = []
-data = []
-File.open('catalogo.txt', 'r') { |file| data = file.readlines}
-data.each do |prod|
-  ls = prod.split(', ')
-  products_list << Product.new(*ls)
-end
-print products_list
-
-
-# La tienda desea generar un nuevo catálogo que no incluya el último
-# precio correspondiente a cada producto debido a que ya no
-# comercializa productos de talla XS.
-# Se pide generar un método que reciba como argumento los datos del
-# archivo catalogo.txt y luego imprima el nuevo catálogo solicitado
-# en un archivo llamado nuevo_catalogo.txt
+print Product
