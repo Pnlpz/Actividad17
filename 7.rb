@@ -6,29 +6,32 @@ class Product
     @sizes = sizes.map(&:to_i)
   end
 
-  products_list = []
-  data = []
-  File.open('catalogo.txt', 'r'){ |file| data = file.readlines }
-  data.each do |prod|
-  ls = prod.split(', ')
-  name = ls.shift
-  products_list << Product.new(name, *ls)
-  end
-
+  def self.new_catalogue(products_list)
     arr = []
     products_list.each do |product|
-  a = "#{product.name}, "
-  product.sizes.each do |size|
-  unless size == product.sizes.last
-  a += ", #{size}"
+      a = "#{product.name}, "
+      product.sizes.each do |size|
+        unless size == product.sizes.last
+          a += ", #{size}"
+        end
+      end
+      arr << a
     end
-  end
-  arr << a
+File.open('new_catalogue.txt', 'w') do |f|
+arr.each { |x| f.puts x }
 end
 
-  File.open('new_catalogue.txt', 'w') do |f|
-  arr.each {|x| f.puts x}
   end
 end
 
-print Product
+products_list = []
+data = []
+File.open('catalogo.txt', 'r'){ |file| data = file.readlines }
+data.each do |prod|
+ls = prod.split(', ')
+name = ls.shift
+products_list << Product.new(name, *ls)
+end
+
+
+Product.new_catalogue(products_list)
